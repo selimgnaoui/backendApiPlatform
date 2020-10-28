@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
+ * @ApiResource
  */
-class Post
+class Task
 {
     /**
      * @ORM\Id()
@@ -22,9 +24,14 @@ class Post
     private $name;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $done;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $content;
+    private $type;
 
     public function getId(): ?int
     {
@@ -43,14 +50,26 @@ class Post
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getDone(): ?bool
     {
-        return $this->content;
+        return $this->done;
     }
 
-    public function setContent(string $content): self
+    public function setDone(bool $done): self
     {
-        $this->content = $content;
+        $this->done = $done;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
